@@ -87,18 +87,18 @@ Update the `coturn\turnserver.config` file
     1. replace the `example.com`
 
 1. Add Coturn configs to the `homeserver.yml`
-Replace the configs form the previous step
+    Replace the configs form the previous step
 
-```bash
-turn_uris:
-  - "turn:m.example:3478?transport=udp"
-  - "turn:m.example:3478?transport=tcp"
-  - "turns:m.example:3478?transport=udp"
-  - "turns:m.example:3478?transport=tcp"
-turn_shared_secret: "SOMESECURETEXT"
-turn_user_lifetime: 1h
-turn_allow_guests: true
-```
+    ```bash
+    turn_uris:
+    - "turn:m.example:3478?transport=udp"
+    - "turn:m.example:3478?transport=tcp"
+    - "turns:m.example:3478?transport=udp"
+    - "turns:m.example:3478?transport=tcp"
+    turn_shared_secret: "SOMESECURETEXT"
+    turn_user_lifetime: 1h
+    turn_allow_guests: true
+    ```
 
 1. deploy the docker compose
 
@@ -117,10 +117,10 @@ turn_allow_guests: true
 
 1. If you need to allow users to register without any verification and the following line to `homeserver.yml` and restart the synapse container
 
-```bash
-enable_registration: true
-enable_registration_without_verification: true
-```
+    ```bash
+    enable_registration: true
+    enable_registration_without_verification: true
+    ```
 
 1. Check you configuration:
     1. Element UI: <https://e.example.com/_matrix>
@@ -129,9 +129,9 @@ enable_registration_without_verification: true
 
 1. Thats it, all done. you can create users with the admin web ui and download the client App from:
 
-1.1. iOS: <https://apps.apple.com/us/app/element-messenger/id1083446067>
-1.1. Android: <https://play.google.com/store/apps/details?id=im.vector.app&hl=en&gl=US>
-1.1. Android (Cafe Bazar): <https://cafebazaar.ir/app/im.vector.app>
+    1. iOS: <https://apps.apple.com/us/app/element-messenger/id1083446067>  
+    1. Android: <https://play.google.com/store/apps/details?id=im.vector.app&hl=en&gl=US>  
+    1. Android (Cafe Bazar): <https://cafebazaar.ir/app/im.vector.app>  
 
 ## Further reading and references
 

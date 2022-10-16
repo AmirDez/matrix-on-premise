@@ -30,7 +30,7 @@ This doc is the minimal and most straightforward approach that I could get to se
     cd $HOME/matrix
     ```
 
-1. Create A or AAA DNS Records pointing to the Server Public I
+1. Create A or AAA DNS Records pointing to the Server Public IP
     1. m.example.com -> for the synapse matrix and admin WebUI
     1. e.example.com -> for element WebUI  
 
@@ -41,7 +41,7 @@ This doc is the minimal and most straightforward approach that I could get to se
 1. Restart NGINX
 
     ```bash
-    service nginx restart
+    sudo service nginx restart
     ```
 
 1. Create a docker network for the matrix network (assuming this server is used by other services)
@@ -50,18 +50,27 @@ This doc is the minimal and most straightforward approach that I could get to se
     sudo docker network create --driver=bridge --subnet=10.10.10.0/24 --gateway=10.10.10.1 matrix_net
     ```
 
-1. Create Element config `sudo nano element-config.json`
-Copy and paste [example contents](https://develop.element.io/config.json) into your file.
+1. Create Element config and Copy and paste [example contents](https://develop.element.io/config.json) into your file.
+
+    ```bash
+    nano element-config.json
+    or
+    curl https://develop.element.io/config.json --output element-config.json
+    ```
 
 1. Remove `"default_server_name": "matrix.org"` from `element-config.json` as this is deprecated
 
-1. Add our custom homeserver to the top of ‍‍‍`element-config.json`  (Replace the Domain Name example.com)
+    ```bash
+    sed -i '/"default_server_name": "matrix.org"/d' element-config.json
+    ```
+
+1. Add our custom homeserver to the top of ‍‍‍`element-config.json` (Replace the Domain Name example.com)
 
     ```bash
     "default_server_config": {
         "m.homeserver": {
-            "base_url": "https://matrix.example.com",
-            "server_name": "matrix.example.com"
+            "base_url": "https://m.example.com",
+            "server_name": "m.example.com"
         },
         "m.identity_server": {
             "base_url": "https://vector.im"
@@ -69,7 +78,7 @@ Copy and paste [example contents](https://develop.element.io/config.json) into y
     },
     ```
 
-1. Generate Synapse config with this command (Replace the Domain Name example.com)
+1. Generate Synapse config (homeserver.yaml) with this command (Replace the Domain Name example.com)
 
     ```bash
     sudo docker run -it --rm \
@@ -81,7 +90,7 @@ Copy and paste [example contents](https://develop.element.io/config.json) into y
 
 1. As its common that your client are behind NATed network traffic you may need to add TRUN service to your setup for reliable VoIP connections.  
 Note: This is required only for mobile devices (iOS and Android), The Element Web UI is using WebRTC which enables port punching though NAT network without TRUN.  
-Update the `coturn\turnserver.config` file
+Update the `coturn\turnserver.config` file:
     1. Update the password `SOMESECURETEXT`
     1. Add the Server Public IP at the last line
     1. replace the `example.com`

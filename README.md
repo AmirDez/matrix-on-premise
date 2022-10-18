@@ -100,10 +100,10 @@ Update the `coturn\turnserver.config` file:
 
     ```bash
     turn_uris:
-    - "turn:m.example:3478?transport=udp"
-    - "turn:m.example:3478?transport=tcp"
-    - "turns:m.example:3478?transport=udp"
-    - "turns:m.example:3478?transport=tcp"
+    - "turn:m.example.com:3478?transport=udp"
+    - "turn:m.example.com:3478?transport=tcp"
+    - "turns:m.example.com:3478?transport=udp"
+    - "turns:m.example.com:3478?transport=tcp"
     turn_shared_secret: "SOMESECURETEXT"
     turn_user_lifetime: 1h
     turn_allow_guests: true

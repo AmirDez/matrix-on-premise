@@ -119,7 +119,7 @@ Update the `coturn\turnserver.config` file:
     1. Access docker shell  
     `sudo docker compose exec -it synapse bash`
     1. run command  
-    `register_new_matrix_user -c /data/homeserver.yaml <http://localhost:8008>`
+    `register_new_matrix_user -c /data/homeserver.yaml http://localhost:8008`
     1. Follow the on screen prompts
     1. Enter exit to leave the container's shell with  
     `exit`

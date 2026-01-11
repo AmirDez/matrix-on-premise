@@ -142,6 +142,21 @@ Update the `coturn\turnserver.config` file:
     1. Android: <https://play.google.com/store/apps/details?id=im.vector.app&hl=en&gl=US>  
     1. Android (Cafe Bazar): <https://cafebazaar.ir/app/im.vector.app>  
 
+1. Firewall Configuration (UFW)
+
+Before starting your services, open the required ports:
+
+```bash
+sudo ufw allow 8008/tcp  # Synapse
+sudo ufw allow 8448/tcp  # Federation (if used)
+sudo ufw allow 3478/tcp
+sudo ufw allow 3478/udp  # Coturn STUN/TURN
+sudo ufw allow 5349/tcp
+sudo ufw allow 5349/udp  # Coturn secure STUN/TURN
+sudo ufw allow 49160:49200/udp  # Coturn media
+sudo ufw allow 443/tcp  # Web access (if using reverse proxy)
+```
+
 ## Further reading and references
 
 1. <https://github.com/coturn/coturn>
